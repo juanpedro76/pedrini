@@ -3,7 +3,7 @@
 $bd_host = "localhost"; 
 $bd_usuario = "test"; 
 $bd_password = "test"; 
-$bd_base = "twt_12m15m"; 
+$bd_base = "twt_marato"; 
 
 mysql_connect($bd_host, $bd_usuario, $bd_password) or die ("error1".mysql_error());
 mysql_select_db($bd_base) or die ("error2".mysql_error());
@@ -15,11 +15,12 @@ FROM tweets WHERE `tweet_text` LIKE '%#%' GROUP BY DAY( created_at )  ORDER BY D
 
 //añadir los hashtags motorizados
 
-$consultahast1=mysql_query("SELECT tag, COUNT( tag ) AS 'num' FROM `tweet_tags` WHERE `tag` = '12m15m'union SELECT tag, COUNT( tag ) AS 'num' FROM `tweet_tags` WHERE `tag` = '15m' union SELECT tag, COUNT( tag ) AS 'num' FROM `tweet_tags` WHERE `tag` = 'alaplaza12m' union SELECT tag, COUNT( tag ) AS 'num' FROM `tweet_tags` WHERE `tag` = '12mglobal' union SELECT tag, COUNT( tag ) AS 'num' FROM `tweet_tags` WHERE `tag` = 'acampadabcn'union SELECT tag, COUNT( tag ) AS 'num' FROM `tweet_tags` WHERE `tag` = 'acampadasol'union SELECT tag, COUNT( tag ) AS 'num' FROM `tweet_tags` WHERE `tag` = 'tomalacalle'order by num DESC");
+$consultahast1=mysql_query("SELECT tag, COUNT( tag ) AS 'num' FROM `tweet_tags` WHERE `tag` = 'maratopobresa'union SELECT tag, COUNT( tag ) AS 'num' FROM `tweet_tags` WHERE `tag` = 'sobrencadires' union SELECT tag, COUNT( tag ) AS 'num' FROM `tweet_tags` WHERE `tag` = 'lacaixaesmordor' order by num DESC");
+
 
 //eliminar los hashtags motorizados
 
-$consultahast2=mysql_query("SELECT tag,COUNT( tag ) AS 'num' FROM `tweet_tags` WHERE not  tag = '12m15m' and not tag='15m' and not tag = 'alaplaza12m'  and not tag='yovoy12m' and not tag='12m' and not tag='12mglobal' and not tag='feliz12m' and not tag='12mani'and not tag='volvemos12m' and not tag='ff' and not tag='m12' and not tag='spanishrevolution' and not tag='12m15mzgz' and not tag='12m15mbcn' and not tag='acampadabcn' and not tag='acampadasol' and not tag='tomalacalle' GROUP BY tag ORDER BY num DESC LIMIT 20");
+$consultahast2=mysql_query("SELECT tag,COUNT( tag ) AS 'num' FROM `tweet_tags` WHERE not  tag = 'maratopobresa' and not tag='15m' and not tag = 'sobrencadires'  and not tag='yovoy12m' and not tag='12m' and not tag='lacaixaesmordor' and not tag='FF' GROUP BY tag ORDER BY num DESC LIMIT 20");
 
 
 while ($crow1 = mysql_fetch_array ($consultahast1)) {

@@ -160,18 +160,6 @@ echo"</strong> del total de tweets realizados durante el evento. Si ponéis el c
 echo'Seguidamente mostramos cuales son los usuarios que más impacto han generado en Twitter. Si un usuario tiene <strong>100 followers</strong> por ejemplo, un twit suyo aparecerá en <strong>100 TimeLine</strong> de diferentes usuarios y consideraremos <strong>100 impresiones</strong> . Si ponéis el cursor sobre la gráfica veréis el número de impresiones que ha generado cada usuario.
 <br><strong>Nota: </strong> Se eliminaron todas las cuentas oficiales de los medios de comunicación y cuentas oficiales del movimiento 15M';
 
-echo'En la siguiente tabla encontramos los <strong>10 RT</strong> más relevantes aparecidos durante el evento y el primer usuario que realizó';
-echo '<table border="0" cellpadding=4 cellspacing=0 id="mitabla">';  
-echo '<tr>';
-echo '<th scope="col">Veces  </th>';
-echo '<th scope="col">nombre</th>';
-echo '</tr>';
-while ($most1 = mysql_fetch_array($consulta09)) {
-echo '<tr>';
-echo '<td style="text-align: left; width: 40;"> '  . $most1['num'] . '</td>' . ' ';
-echo '<td style="text-align: left; width: 40;"> '  . $most1['screen_name'] . '</td>' . ' ';
-echo '</tr>';
-}
 // libera los registros de la tabla
 echo'</table>';
 mysql_free_result($consulta1); 

@@ -3,7 +3,7 @@
 $bd_host = "localhost"; 
 $bd_usuario = "test"; 
 $bd_password = "test"; 
-$bd_base = "twt_12m15m"; 
+$bd_base = "twt_marato"; 
 
 mysql_connect($bd_host, $bd_usuario, $bd_password) or die ("error1".mysql_error());
 mysql_select_db($bd_base) or die ("error2".mysql_error());
@@ -12,12 +12,8 @@ mysql_select_db($bd_base) or die ("error2".mysql_error());
 
 $consulta01=mysql_query("SELECT COUNT( user_id ) AS 'num', screen_name,profile_image_url, name FROM tweets  GROUP BY user_id ORDER BY num DESC LIMIT 15 ");
 
-//eliminar los hashtags motorizados
-
-$consulta02=mysql_query("SELECT tag,COUNT( tag ) AS 'num' FROM `tweet_tags` WHERE not  tag = '12m15m' and not tag='15m' and not tag = 'alaplaza12m'  and not tag='yovoy12m' and not tag='12m' and not tag='12mglobal' and not tag='feliz12m' and not tag='12mani'and not tag='volvemos12m' and not tag='ff' and not tag='m12' and not tag='spanishrevolution' and not tag='12m15mzgz' and not tag='12m15mbcn' and not tag='acampadabcn' and not tag='acampadasol' and not tag='tomalacalle' GROUP BY tag ORDER BY num DESC LIMIT 20");
 
 //impactes
-
 
 $consulta03=mysql_query("SELECT tweets.screen_name, tweets.tweet_text, SUM( followers_count ) AS resultado FROM users, tweets WHERE users.screen_name = tweets.screen_name  and not tweets.screen_name ='elmundoes' and not tweets.screen_name ='el_pais'and not tweets.screen_name ='rtve'  and  not tweets.screen_name ='20m' and  not tweets.screen_name ='la_informacion' and  not tweets.screen_name ='eljueves' and not tweets.screen_name ='telesurtv'  and not tweets.screen_name ='informativost5' and  not tweets.screen_name ='lasextatv' and  not tweets.screen_name ='AgorasolRadio' and  not tweets.screen_name ='publico_es' and  not tweets.screen_name ='lavanguardia' and  not tweets.screen_name ='milenio' and  not tweets.screen_name ='NTelevisa_com' and  not tweets.screen_name ='elespectador'and  not tweets.screen_name ='repubblicait'  and  not tweets.screen_name ='antena3com'  and  not tweets.screen_name ='a3noticias' and  not tweets.screen_name ='democraciareal'  and  not tweets.screen_name ='acampadabcn' and  not tweets.screen_name ='barcelonarealya'  and  not tweets.screen_name ='12m_15m'  and  not tweets.screen_name ='15mayovalencia' and  not tweets.screen_name ='drymadrid' and  not tweets.screen_name ='Anonymous_Co'  and  not tweets.screen_name ='OccupyWallStNYC'  and  not tweets.screen_name ='AnonymousAction'  and  not tweets.screen_name ='OccupyWallSt' and  not tweets.screen_name ='Anonymous_Link' and  not tweets.screen_name ='AnonymousMexi'  and  not tweets.screen_name ='acampadazgz' and  not tweets.screen_name ='Acampadaparis'  and  not tweets.screen_name ='drynternational' and  not tweets.screen_name ='juventudsin' and  not tweets.screen_name ='OccupyLondon' and  not tweets.screen_name ='iaioflautas'  and  not tweets.screen_name ='tw_top_news'  GROUP BY tweets.screen_name ORDER BY resultado DESC LIMIT 0 , 15");
 
