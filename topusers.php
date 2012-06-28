@@ -6,6 +6,10 @@
 			renderTo: 'container1',
 				type: 'bar'
 			},
+                        credits: {
+                           text: '',
+                           href: ''
+                        },
 			title: {
 				text: 'Top 15 Users (Twittero x Tweets)'
 			},
@@ -20,15 +24,15 @@
 			yAxis: {
 				min: 0,
 				title: {
-					text: 'tweets'
+					text: ''
 				}
 			},
 			legend: {
 				layout: 'vertical',
 				align: 'right',
 				verticalAlign: 'top',
-				x: -30,
-				y: 150,
+				x: -480,
+				y: 1,
 				floating: true,
 				borderWidth: 1,
 				backgroundColor: '#FFFFFF',
@@ -52,6 +56,63 @@
 			}]
 		});
 	});
+	 var chart;
+    $(document).ready(function() {
+        chart = new Highcharts.Chart({
+            chart: {
+                renderTo: 'tweetsenviados_usuaro',
+                type: 'areaspline'
+            },
+            credits: {
+            text: '',
+            href: ''
+        },
+            title: {
+                text: 'Tweets enviados'
+            },
+            legend: {
+                layout: 'vertical',
+                align: 'left',
+                verticalAlign: 'top',
+                x: 50,
+                y: 2,
+                floating: true,
+                borderWidth: 1,
+                backgroundColor: '#FFFFFF'
+            },
+            xAxis: {
+                categories: ['<?php echo join($twt1fecha, "','");?>'],
+                plotBands: [{ // visualize the weekend
+                    from: 4.5,
+                    to: 6.5,
+                    color: 'rgba(99, 70, 213, .2)'
+                }]
+            },
+            yAxis: {
+                title: {
+                     text: 'enviado'
+                }
+            },
+            tooltip: {
+                formatter: function() {
+                   return ''+
+                    this.x +': '+ this.y +' tweets';
+               }
+            },
+            credits: {
+                enabled: false
+            },
+            plotOptions: {
+                areaspline: {
+                    fillOpacity: 0.5
+                }
+            },
+            series: [{
+                name: 'tweets',
+                data: [<?php echo join($twt1usuari,',');?>]
+            }]
+        });
+    });
 var chart;
 	$(document).ready(function() {
 		chart = new Highcharts.Chart({
@@ -59,6 +120,10 @@ var chart;
 				renderTo: 'container3',
 				type: 'bar'
 			},
+                        credits: {
+                            text: '',
+                            href: ''
+                        },
 			title: {
 				text: 'Impact Users (Twitteros x Impactos)'
 			},
@@ -71,15 +136,15 @@ var chart;
 			yAxis: {
 				min: 0,
 				title: {
-					text: 'impactos'
+					text: ''
 				}
 			},
 			legend: {
 				layout: 'vertical',
 				align: 'right',
 				verticalAlign: 'top',
-				x: -30,
-				y: 150,
+				x: -560,
+				y: 1,
 				floating: true,
 				borderWidth: 1,
 				backgroundColor: '#FFFFFF',
@@ -104,10 +169,19 @@ var chart;
 	});
 </script>
 
-<?php 
+<?php
 echo " <strong><center>Usuarios</strong></center>";
 echo "<p>";
-echo" <p> En la primera <strong> gráfica</strong> representamos a los usuarios más activos durante el evento.<p>";
+echo"<p> Primero mostramos el número de tweets enviados con el usuario oficial, mostrando cuantos <strong>tweets</strong> envió el usuario <strong> $consultarper_usuari </strong> desglosados por los días, motorizados durante el evento.";
+?>
+
+<div id="tweetsenviados_usuaro" style="width: 670px; height: 350px;"></div>
+
+
+<?php 
+
+echo" <p> Seguidamente representamos cuales son los usuarios más activos durante el evento.<p>";
+echo"<p>";
 ?>
 
 <div id="container1" style="width: 670px; height: 350px;"></div>
@@ -153,13 +227,11 @@ echo round($resultado,2);
 echo"</strong> del total de tweets realizados durante el evento. Si ponéis el cursor sobre la gráfica veréis el número de tweets de cada usuario.";
 ?>
 
-<div id="container3" style="width: 670px; height: 350px;"></div>
+
 
 <?php
 
-echo'Seguidamente mostramos cuales son los usuarios que más impacto han generado en Twitter. Si un usuario tiene <strong>100 followers</strong> por ejemplo, un twit suyo aparecerá en <strong>100 TimeLine</strong> de diferentes usuarios y consideraremos <strong>100 impresiones</strong> . Si ponéis el cursor sobre la gráfica veréis el número de impresiones que ha generado cada usuario.
-<br><strong>Nota: </strong> Se eliminaron todas las cuentas oficiales de los medios de comunicación y cuentas oficiales del movimiento 15M';
-
+echo'Finalmente mostramos cuales son los usuarios que más impacto han generado en Twitter. Si un usuario tiene <strong>100 followers</strong> por ejemplo, un twit suyo aparecerá en <strong>100 TimeLine</strong> de diferentes usuarios y consideraremos <strong>100 impresiones</strong> . Si ponéis el cursor sobre la gráfica veréis el número de impresiones que ha generado cada usuario.';
 // libera los registros de la tabla
 echo'</table>';
 mysql_free_result($consulta1); 
@@ -169,4 +241,5 @@ mysql_free_result($consulta9);
 mysql_close($conexion); // cierra la conexion con la base de datos
 
 ?>
+<div id="container3" style="width: 670px; height: 350px;"></div>
 

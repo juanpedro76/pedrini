@@ -3,18 +3,28 @@
     $(document).ready(function() {
         chart = new Highcharts.Chart({
             chart: {
-                renderTo: 'containertotdia',
-                type: 'areaspline'
+                type: 'areaspline',
+                renderTo: 'containertotdia',  
+events: {
+                click: function(event) {
+                    alert ('x: '+ event.xAxis[0].value +', y: '+
+                          event.yAxis[0].value);
+                }
+            }           
             },
-            title: {
+            credits: {
+            text: '',
+            href: ''
+        },
+           title: {
                 text: 'Tweets enviados'
             },
             legend: {
                 layout: 'vertical',
                 align: 'left',
                 verticalAlign: 'top',
-                x: 150,
-                y: 100,
+                x: 60,
+                y: 2,
                 floating: true,
                 borderWidth: 1,
                 backgroundColor: '#FFFFFF'
@@ -43,6 +53,7 @@
             },
             plotOptions: {
                 areaspline: {
+                    color: '#cdc0de',
                     fillOpacity: 0.5
                 }
             },
@@ -59,8 +70,12 @@
                renderTo: 'containerhtags1',
                 type: 'column'
             },
+            credits: {
+            text: '',
+            href: ''
+        },
             title: {
-                text: 'Hashtags Motorizados'
+                text: 'Hashtags Monitorizados'
             },
             subtitle: {
                 text: ''
@@ -79,8 +94,8 @@
                 backgroundColor: '#FFFFFF',
                 align: 'left',
                 verticalAlign: 'top',
-                x: 500,
-                y: 70,
+                x: 60,
+                y: 2,
                 floating: true,
                 shadow: true
             },
@@ -101,7 +116,51 @@
 				data:[<?php echo join($twt6num,',');?>]
               }]
         });
-    });  
+    });
+var chart;
+    $(document).ready(function() {
+        chart = new Highcharts.Chart({
+            chart: {
+                renderTo: 'containersedes',
+                type: 'bar'
+            },
+           credits: {
+            text: '',
+            href: ''
+        },
+           title: {
+                text: 'Sedes '
+            },
+            xAxis: {
+                categories: ['<?php echo join($twtsedes, "','");?>']
+            },
+            yAxis: {
+               min: 0,
+                title: {
+                    text: ''
+                }
+            },
+            legend: {
+                backgroundColor: '#FFFFFF',
+                reversed: true
+            },
+            tooltip: {
+                formatter: function() {
+                    return ''+
+                        this.series.name +': '+ this.y +'';
+                }
+            },
+            plotOptions: {
+                series: {
+                    stacking: 'normal'
+                }
+            },
+                series: [{
+                name: 'Sedes',
+                data: [<?php echo join($twtnumsedes,',');?>]
+               }]
+        });
+    }); 
  var chart;
     $(document).ready(function() {
         chart = new Highcharts.Chart({
@@ -109,7 +168,11 @@
                 renderTo: 'containerhtags2',
                 type: 'bar'
             },
-            title: {
+           credits: {
+            text: '',
+            href: ''
+        },
+           title: {
                 text: 'Hashtags más utilizados '
             },
             xAxis: {
@@ -118,7 +181,7 @@
             yAxis: {
                min: 0,
                 title: {
-                    text: 'Hashtags más utilizados'
+                    text: ''
                 }
             },
             legend: {
@@ -144,16 +207,21 @@
     }); 
  </script>
  <?php
-echo' <p>Primero de todo tenemos una gráfica en que autentificamos el número de de tweets enviados durante las fechas analizadas';
+echo' <p>Primero mostramos el número de tweets enviados separadas en fechas.';
 ?>
 <div id="containertotdia" style="height: 300px; width: 670px"></div>
 <p>
 <?php
 echo'<strong><center>Hastags</strong></center><p>';
-echo'En la primera gráfica se muestran cada uno de los hashtags motorizados durante el evento';
+echo'En la siguiente tabla mostramos todos los hashtags monitorizados durante el evento.';
 ?>
 <div id="containerhtags1" style="width: 670px; height: 350px;"></div>
 <?php
-echo'<p>Finalmente mostrados los <strong>hashtags</strong> más utilizados durante el evento y el número de veces (tweets) que fué utilizado. Si ponéis el cursor sobre la gráfica veréis el número';
+echo'Seguidamente se muestran todas las sedes motorizadas durante el evento.';
+?>
+<div id="containersedes" style="width: 670px; height: 350px;"></div>
+
+<?php
+echo'<p>Finalmente mostrados los hashtags más aparecidos durante el evento y el número de veces (tweets) que fueron enviados. Si ponéis el cursor sobre la gráfica viereis el número. ';
 ?>
 <div id="containerhtags2" style="width: 670px; height: 350px;"></div>

@@ -3,7 +3,7 @@
 $bd_host = "localhost"; 
 $bd_usuario = "test"; 
 $bd_password = "test"; 
-$bd_base = "twt_marato"; 
+$bd_base = "twt_kfe06final"; 
 
 mysql_connect($bd_host, $bd_usuario, $bd_password) or die ("error1".mysql_error());
 mysql_select_db($bd_base) or die ("error2".mysql_error());

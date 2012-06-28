@@ -15,17 +15,19 @@ $consulta5 = mysql_query("SELECT SUM( followers_count ) AS 'num' FROM users, twe
 $consulta6 = mysql_query("SELECT date(created_at) FROM `tweets` ORDER BY `tweets`.`created_at` ASC LIMIT 1");
 $consulta7 = mysql_query("SELECT date(created_at) FROM `tweets` ORDER BY `tweets`.`created_at` DESC LIMIT 1");
 $consulta8 = mysql_query("SELECT count( * ) AS num FROM `tweet_mentions`"); 
+echo'<br> </br>';
+
 while ($most1 = mysql_fetch_array($consulta1)) { 
 
     echo '<br> * Número de tweets realizados: ' . '<b>' . $most1['num'] . '</b>' . ' ';
-
+    
 }
 
 
 while ($most2 = mysql_fetch_array($consulta2)) {
 
     echo '<br> * Número total de usuarios: ' . '<b>' . $most2['num'] . '</b>' . ' '; 
-
+    echo '(cuentas de twitter que han utilizado el #hashtag analizado)';
 } 
 
 while ($most3 = mysql_fetch_array($consulta3)) { 
@@ -36,7 +38,7 @@ while ($most3 = mysql_fetch_array($consulta3)) {
 
 while ($most4 = mysql_fetch_array($consulta4)) {
 
-    echo '<br> * Links enviados: ' . '<b>' . $most4['num'] . '</b>' . ' '; 
+    echo '<br> * Enlaces enviados: ' . '<b>' . $most4['num'] . '</b>' . ' '; 
 
 }
 
